@@ -12,7 +12,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: 安装包
-        run: pip3 install -r requirements.txt
+        run: |
+          python3 -m venv code/venv
+          source code/venv/bin/activate
+          pip3 install -r requirements.txt
 
       - name: 开始执行
         run: python3 code/getHistoryData.py > data/workflow.log 2>&1
