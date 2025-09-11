@@ -23,3 +23,8 @@ def saveFundHistoryValues(code, historyValues, historyValuesSavePath):
     new_df = historyValues[['净值日期', '累计净值']]
     new_df.to_csv(file, index=False, encoding='gbk')
     print("save {} ok!\n".format(file))
+
+def process_qfq_value(df):
+    if len(df.loc[df['净值日期'] > df.loc[df['累计净值'] < 0]['净值日期'].max()]) != 0:
+        df = df.loc[df['净值日期'] > df.loc[df['累计净值'] < 0]['净值日期'].max()]
+    return df
