@@ -1,0 +1,24 @@
+name: Build Safari Extension
+on:
+  push:
+    branches:
+      - main  # 只有推送到 main 分支时才会触发构建
+
+jobs:
+  build:
+    runs-on: linux-latest
+    steps:
+      - name: 拉取代码
+        uses: actions/checkout@v4
+
+      - name: 安装包
+        run: pip3 install -r requirements.txt
+
+      - name: 开始执行
+        run: python3 code/getHistoryData.py > data/workflow.log 2>&1
+
+      - name: 上传结果
+        uses: actions/upload-artifact@v4
+        with:
+            name: my-artifact
+            path: ${{ github.workspace }}/data
