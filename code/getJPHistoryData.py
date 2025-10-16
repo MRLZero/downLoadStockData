@@ -14,7 +14,7 @@ def getJPHistoryData(code):
 
 if __name__ == '__main__':
 
-    codes = ['7203']
+    codes = []
     save_path = 'data/fundsHistoryValue'
     for code in codes:
         df = getJPHistoryData(code)
